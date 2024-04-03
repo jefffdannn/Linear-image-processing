@@ -1,0 +1,43 @@
+clc;
+clear all;
+close all;
+% Load the input image
+input_image = imread('dhoni.jpg');
+
+% Convert the input image to grayscale
+gray_image = rgb2gray(input_image);
+
+% Display the grayscale image
+figure;
+subplot(2, 2, 1);
+imshow(gray_image);
+title('Grayscale Image');
+
+% Adjust brightness
+brightness_factor = 50; % Change this value to adjust brightness
+brightened_image = gray_image + brightness_factor;
+
+% Make sure pixel values are in the valid range [0, 255]
+brightened_image = max(min(brightened_image, 255), 0);
+
+% Display the brightened image
+subplot(2, 2, 2);
+imshow(uint8(brightened_image));
+title('Brightened Image');
+
+% Adjust contrast
+contrast_factor = 1.5; % Change this value to adjust contrast
+contrasted_image = contrast_factor * (gray_image - 128) + 128;
+
+% Make sure pixel values are in the valid range [0, 255]
+contrasted_image = max(min(contrasted_image, 255), 0);
+
+
+% Display the contrasted image
+subplot(2, 2, 3);
+imshow(uint8(contrasted_image));
+title('Contrasted Image');
+
+% Save the results
+imwrite(uint8(brightened_image), 'brightened_image.jpg');
+imwrite(uint8(contrasted_image), 'contrasted_image.jpg');
